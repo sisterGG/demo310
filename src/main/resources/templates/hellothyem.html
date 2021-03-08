@@ -1,0 +1,26 @@
+<!DOCTYPE html >
+
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body >
+ thyemleaf hello
+<p th:text="${hellothy}">
+<h1 th:text="${userList.get(0).getName()}"></h1>
+<h1 th:text="${user.getPid()+' 名字是 '+user.getName()}"></h1>
+<text th:text="${date}"></text>
+<br />
+<text th:text="${#dates.format(date,'yyyy-MM-dd,hh:mm')}"></text>
+ <br/>
+<a th:href="@{/pros}"  >goto pros</a>
+ <br/>
+
+
+</h2>
+ <a  th:text="'goto第'+${userList.get(0).getPid()}+'个'" th:href="@{/pros/{id}(id=${userList.get(0).getPid()})}" > </a>
+
+ </p>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo373.dao.IUserDao">
+    <!-- 配置查询所有 -->
+    <select id="findAll" resultType="com.example.demo373.entity.User">
+        select * from person
+    </select>
+    <insert id="insert" parameterType="com.example.demo373.entity.User">
+          INSERT INTO person (pid, name) VALUES (#{pid},#{name})
+    </insert>
+    <delete id="del3">
+        delete from person where pid = 3;
+    </delete>
+</mapper>
