@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
-@EnableWebMvc
+//@EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
 
     @Override

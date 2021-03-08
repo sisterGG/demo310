@@ -7,24 +7,37 @@ cat:
    name: meimei
 
 
+#spring:
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost:3307/jeegen?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+#    username: root
+#    password: root
+#    type: com.alibaba.druid.pool.DruidDataSource
+#    maxActive: 32
+#mybatis-plus:
+#  configuration:
+#    map-underscore-to-camel-case: true
+#    auto-mapping-behavior: full
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#  mapper-locations: classpath*:mapper/**/*Mapper.xml
+#  global-config:
+#    # 逻辑删除配置
+#    db-config:
+#      # 删除前
+#      logic-not-delete-value: 1
+#      # 删除后
+#      logic-delete-value: 0
+
+
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3307/jeegen?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://localhost:3307/jeegen?useUnicode=true&amp;characterEncodeing=UTF-8&amp;useSSL=false&amp;serverTimezone=GMT
     username: root
     password: root
-    type: com.alibaba.druid.pool.DruidDataSource
-    maxActive: 32
-mybatis-plus:
-  configuration:
-    map-underscore-to-camel-case: true
-    auto-mapping-behavior: full
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-  mapper-locations: classpath*:mapper/**/*Mapper.xml
-  global-config:
-    # 逻辑删除配置
-    db-config:
-      # 删除前
-      logic-not-delete-value: 1
-      # 删除后
-      logic-delete-value: 0
+#    type: com.alibaba.druid.pool.DruidDataSource
+logging:
+  level:
+    root: warn
+    com.example.demo373.mapper: trace

@@ -3,8 +3,10 @@ package com.example.demo373.controller;
 
 import com.example.demo373.dao.IUserDao;
 import com.example.demo373.entity.User;
-import com.example.demo373.mapper.PersonMapper;
-import com.zaxxer.hikari.HikariDataSource;
+ import com.zaxxer.hikari.HikariDataSource;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiOperation;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -28,21 +30,21 @@ import java.util.List;
 
 @RestController
 @RequestMapping
-
+@Api(tags = "登录接口")
+@ApiModel
 
 public class fuck {
     @Autowired
     private DataSource ds;
-    private PersonMapper pmr;
-    @RequestMapping(value = "/fuck",method = RequestMethod.GET)
+     @RequestMapping(value = "/fuck",method = RequestMethod.GET)
 
     public String hello1(){
         System.out.println("hellofuck");
         System.out.println(ds   );
-        System.out.println(pmr);
-        return "hellofuck0088880";
+         return "hellofuck0088880";
     }
     @RequestMapping(value = "/fuck1",method = RequestMethod.GET)
+    @ApiOperation("登录")
 
     public List<User> hello2() throws IOException {
         System.out.println("hellofuck1");

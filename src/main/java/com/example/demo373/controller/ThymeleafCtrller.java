@@ -20,8 +20,15 @@ package com.example.demo373.controller;
 public class ThymeleafCtrller {
     @GetMapping("pros")
     public String hello(@RequestParam(name = "idd", required = false) Integer id,
-                        @RequestParam(name = "sxx", required = false) String sex,Model model){
-        model.addAttribute("hellothy","hello horrac womenday"+" " +id+"  "+sex);
+                        @RequestParam(name = "sxx", required = false) String sex,
+                        @RequestParam(name = "age", required = false) Integer age,
+                        Model model){
+        age=age*44;
+        String s="i am fucking other women";
+        if (sex.matches("f")){
+            s="you are fucked";
+        }
+        model.addAttribute("hellothy","hello horrac womenday"+" " +id+"  "+s+age);
 
 
         return "pros";
