@@ -1,0 +1,186 @@
+<!DOCTYPE html >
+
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body >
+<script type="text/javascript" th:src="@{js/jQuery.js}"></script>
+ thyemleaf hello
+<p th:text="${hellothy}">
+<h1 th:text="${userList.get(0).getName()}"></h1>
+<h1 th:text="${user.getPid()+' 名字是 '+user.getName()}"></h1>
+<text th:text="${date}"></text>
+<br />
+<text th:text="${#dates.format(date,'yyyy-MM-dd,hh:mm')}"></text>
+ <br/>
+<a th:href="@{/pros}"  >goto pros</a>
+ <br/>
+ <label th:each="user : ${userList}">
+     <!-- 将用户的主键 uId 存在在 name 属性中-->
+     <td th:text="${user.getPid()}" ></td>
+
+     <td th:text="${user.getName()}"></td>
+<!--     &lt;!&ndash; 使用dates对象格式化日期&ndash;&gt;-->
+<!--     <td th:text="${#dates.format(user.birthday, 'yyyy-MM-dd HH:mm')}"></td>-->
+<!--     &lt;!&ndash; 三运运算判断是否已婚&ndash;&gt;-->
+<!--     <td th:text="${user.isMarry}?'是':'否'"></td>-->
+<!--     <td th:text="${user.price}"></td>-->
+     <textarea class="txt" th:name="${user.getName()}" th:id="'user_id'+${user.getPid()}"  onchange=test(this.id)  style="width:400px;height:50px;"></textarea>
+     <br/>
+ </label>
+ <text id="t">this is text t</text>
+<button id="btn">
+    按钮1
+</button>
+<button id="btn_one_record">
+    单条记录
+</button>
+
+</h2>
+ <a  th:text="'goto第'+${userList.get(0).getPid()}+'个'" th:href="@{/pros/{id}(id=${userList.get(0).getPid()})}" > </a>
+
+ </p>
+</body>
+
+<script th:inline="javascript">
+
+    document.getElementById("btn").addEventListener("click", function () {
+        // alert("alert")
+        // for (x in document.getElementsById("user_id2"))  // x 为属性名
+        // {
+        //      // alert(x.id)
+        //     console.log(typeof (x))
+        // }
+        // var test=document.getElementById('t').innerText;
+        console.log("sss")
+        var obj_rs
+        var jsonstr=[[${json1}]];
+        console.log(jsonstr);
+        var obj=$.parseJSON( jsonstr );
+        var test=document.getElementsByClassName('txt');
+        console.log(obj)
+
+        var txt1="<p>文本-1。</p>";              // 使用 HTML 标签创建文本
+        var txt2=$("<p></p>").text("文本-2。");  // 使用 jQuery 创建文本
+        var txt3=document.createElement("p");
+        txt3.innerHTML="文本-3。";               // 使用 DOM 创建文本 text with DOM
+        for (var v in obj){
+            console.log(v)
+        }
+        $.each(obj, function(){
+            console.log(this);
+            $.each(this, function(key, val) {
+
+                console.log(key);//可以输出姓名
+                console.log(val);//可以输出姓名
+                $("body").append("<label>"+key+"</label>");
+                $("body").append("<input value='"+val+"'> </input>");
+                $("body").append( "</br>");
+
+
+
+            });
+
+        });
+
+         $.ajax({
+             type : "GET",
+             url : "http://localhost:8081/api/first_api",
+             async: true,
+             success: function(data){
+
+
+                 var api_rs=data ;
+                 console.log(api_rs)
+                 var obj_rs=$.parseJSON( api_rs );
+                 $.each(obj_rs, function(){
+                     console.log(this);
+                     $.each(this, function(key, val) {
+
+                         console.log(key);//可以输出姓名
+                         console.log(val);//可以输出姓名
+                         $("body").append("<label>"+key+"</label>");
+                         $("body").append("<input value='"+val+"'> </input>");
+                         $("body").append( "</br>");
+
+
+
+                     });
+
+                 });
+
+             }
+
+        })
+
+
+        // var obj_rs=$.parseJSON( api_rs );
+        $("body").append(txt1,txt2,txt3);
+    });
+    document.getElementById("btn_one_record").addEventListener("click", function () {
+
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8081/api/dao/User_api",
+            async: true,
+            success: function (data) {
+
+
+                var api_rs = data;
+                console.log(api_rs)
+                var obj_rs = $.parseJSON(api_rs);
+
+                var i=0
+                $.each(obj_rs.keys, function () {
+
+                    console.log(obj_rs.keys[i])
+
+                    console.log(obj_rs.types[i])
+                    $("body").append("<label id='"+obj_rs.keys[i]+"' class='rec_key' >"+obj_rs.keys[i]+"    </label>");
+                    $("body").append("<label>"+obj_rs.types[i]+"   </label>");
+                    $("body").append("<input id='"+'rec_value'+"' class='rec_value' value=''> </input>");
+                    $("body").append( "</br>");
+                    i=i+1
+                });
+                $("body").append( "<button id='btn_save'>提交保存</button>");
+                document.getElementById("btn_save").addEventListener("click", function () {
+                    var keys=document.getElementsByClassName("rec_key")
+                    var values=document.getElementsByClassName("rec_value")
+                    console.log(keys)
+                    console.log(values)
+                    var i=0
+
+                    var json ={}
+                    $.each(keys, function () {
+                        json[keys[i].id+""]=values[i].value+""
+                        i=i+1
+                    });
+
+                    console.log(json)
+                    const xhr = new XMLHttpRequest();
+                    xhr.open('POST', 'http://localhost:8081/posttest');
+                    xhr.setRequestHeader('Content-Type', 'application/json');
+                    xhr.send(JSON.stringify(json));
+
+
+
+                 });
+
+
+            }
+
+        })
+
+
+
+    });
+
+        function test(id)
+    {
+
+        alert(id)
+    }
+</script>
+</html>

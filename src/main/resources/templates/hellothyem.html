@@ -16,11 +16,51 @@
  <br/>
 <a th:href="@{/pros}"  >goto pros</a>
  <br/>
+ <label th:each="user : ${userList}">
+     <!-- 将用户的主键 uId 存在在 name 属性中-->
+     <td th:text="${user.getPid()}" ></td>
 
+     <td th:text="${user.getName()}"></td>
+<!--     &lt;!&ndash; 使用dates对象格式化日期&ndash;&gt;-->
+<!--     <td th:text="${#dates.format(user.birthday, 'yyyy-MM-dd HH:mm')}"></td>-->
+<!--     &lt;!&ndash; 三运运算判断是否已婚&ndash;&gt;-->
+<!--     <td th:text="${user.isMarry}?'是':'否'"></td>-->
+<!--     <td th:text="${user.price}"></td>-->
+     <textarea class="txt" th:name="${user.getName()}" th:id="'user_id'+${user.getPid()}"  onchange=test(this.id)  style="width:400px;height:50px;"></textarea>
+     <br/>
+ </label>
+ <text id="t">this is text t</text>
+<button id="btn">
+    按钮1
+</button>
 
 </h2>
  <a  th:text="'goto第'+${userList.get(0).getPid()}+'个'" th:href="@{/pros/{id}(id=${userList.get(0).getPid()})}" > </a>
 
  </p>
 </body>
+
+<script>
+
+    document.getElementById("btn").addEventListener("click", function () {
+        // alert("alert")
+        // for (x in document.getElementsById("user_id2"))  // x 为属性名
+        // {
+        //      // alert(x.id)
+        //     console.log(typeof (x))
+        // }
+        // var test=document.getElementById('t').innerText;
+        var test=document.getElementsByClassName('txt');
+        console.log(test)
+        for (x in test){
+
+        }
+    });
+
+    function test(id)
+    {
+
+        alert(id)
+    }
+</script>
 </html>

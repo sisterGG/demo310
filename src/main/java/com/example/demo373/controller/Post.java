@@ -22,6 +22,7 @@ public class Post {
         System.out.println("post received");
         System.out.println(jsons);
         User user1 = JSON.parseObject(jsons, User.class);
+
         System.out.println(user1.getName()+user1.getPid());
 
 
